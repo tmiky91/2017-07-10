@@ -41,6 +41,14 @@ public class ArtObject {
 		this.style = style;
 		this.title = title;
 	}
+	
+	
+
+	public ArtObject(int id) {
+		this.id = id;
+	}
+
+
 
 	public int getId() {
 		return id;
