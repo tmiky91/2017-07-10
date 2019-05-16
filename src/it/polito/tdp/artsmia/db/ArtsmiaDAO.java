@@ -81,13 +81,22 @@ public class ArtsmiaDAO {
 				if(!grafo.containsVertex(identityMap.get(o2))) {
 					grafo.addVertex(identityMap.get(o2));
 				}
-				if(!grafo.containsEdge(identityMap.get(o1), identityMap.get(o2)) || !grafo.containsEdge(identityMap.get(o2), identityMap.get(o1))) {
+				if(!grafo.containsEdge(identityMap.get(o1), identityMap.get(o2)) && !grafo.containsEdge(identityMap.get(o2), identityMap.get(o1))) {
 					DefaultWeightedEdge edge = grafo.addEdge(identityMap.get(o1), identityMap.get(o2));
 					grafo.setEdgeWeight(edge, peso);
 				}
 				else {
 					DefaultWeightedEdge edge =grafo.getEdge(identityMap.get(o1), identityMap.get(o2));
+					grafo.setEdgeWeight(edge, peso);
 				}
+//				if(grafo.containsEdge(identityMap.get(o1), identityMap.get(o2))) {
+//					DefaultWeightedEdge edge =grafo.getEdge(identityMap.get(o1), identityMap.get(o2));
+//					grafo.setEdgeWeight(edge, peso);
+//				}
+//				if(!grafo.containsEdge(identityMap.get(o1), identityMap.get(o2)) && !grafo.containsEdge(identityMap.get(o2), identityMap.get(o1))) {
+//					DefaultWeightedEdge edge = grafo.addEdge(identityMap.get(o1), identityMap.get(o2));
+//					grafo.setEdgeWeight(edge, peso);
+//				}
 
 			}
 			conn.close();
