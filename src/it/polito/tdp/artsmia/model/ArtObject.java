@@ -19,6 +19,11 @@ public class ArtObject {
 	private String style;
 	private String title;
 
+	public ArtObject(int id) {
+		super();
+		this.id = id;
+	}
+
 	public ArtObject(int objectId, String classification, String continent, 
 			String country, int curatorApproved, String dated, String department, 
 			String medium, String nationality, String objectName, int restricted, 

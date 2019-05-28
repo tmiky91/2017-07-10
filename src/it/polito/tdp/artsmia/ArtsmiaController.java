@@ -6,8 +6,11 @@ package it.polito.tdp.artsmia;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import it.polito.tdp.artsmia.model.Model;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
@@ -39,19 +42,30 @@ public class ArtsmiaController {
 	@FXML // fx:id="txtResult"
 	private TextArea txtResult; // Value injected by FXMLLoader
 
+	private Model model;
+
 	@FXML
 	void doAnalizzaOggetti(ActionEvent event) {
-		txtResult.setText("doAnalizzaOggetti");
+		txtResult.setText(model.creaGrafo());
 	}
 
 	@FXML
 	void doCalcolaComponenteConnessa(ActionEvent event) {
-		txtResult.setText("doCalcolaComponenteConnessa");
+		String id = txtObjectId.getText();
+		if(id!=null || !id.isEmpty()) {
+			if(model.isDigit(id)) {
+				txtResult.setText(model.getConnessione(Integer.parseInt(id)));
+			}else {
+				showMessage("Errore: Inserire un ID valido");
+			}
+		}else {
+			showMessage("Errore: Inserire un ID");
+		}
 	}
 
 	@FXML
 	void doCercaOggetti(ActionEvent event) {
-		txtResult.setText("doCercaOggetti");
+		
 	}
 
 	@FXML // This method is called by the FXMLLoader when initialization is complete
@@ -63,5 +77,15 @@ public class ArtsmiaController {
 		assert txtObjectId != null : "fx:id=\"txtObjectId\" was not injected: check your FXML file 'Artsmia.fxml'.";
 		assert txtResult != null : "fx:id=\"txtResult\" was not injected: check your FXML file 'Artsmia.fxml'.";
 
+	}
+
+	public void setModel(Model model) {
+		this.model = model;
+	}
+	
+	private void showMessage(String message) {
+		Alert alert = new Alert(Alert.AlertType.ERROR);
+		alert.setContentText(message);
+		alert.show();
 	}
 }
