@@ -31,14 +31,12 @@ public class Model {
 		List<EsposizioniComuni> espComuni = dao.getEsposizioniComuni(idMap);
 		Graphs.addAllVertices(grafo, idMap.values());
 		for(EsposizioniComuni ec: espComuni) {
-			Graphs.addEdgeWithVertices(grafo, ec.getO1(), ec.getO2());
 			DefaultWeightedEdge edge = grafo.getEdge(ec.getO1(), ec.getO2());
-			grafo.setEdgeWeight(edge, ec.getPeso());
-//			if(edge==null) {
-//				Graphs.addEdge(grafo, ec.getO1(), ec.getO2(), ec.getPeso());
-//			}else {
-//				grafo.setEdgeWeight(edge, ec.getPeso());
-//			}
+			if(edge==null) {
+				Graphs.addEdgeWithVertices(grafo, ec.getO1(), ec.getO2(), ec.getPeso());
+			}else {
+				grafo.setEdgeWeight(edge, ec.getPeso());
+			}
 		}
 		risultato+="Grafo Creato. Vertici: "+grafo.vertexSet().size()+" Archi: "+grafo.edgeSet().size();
 		return risultato;
