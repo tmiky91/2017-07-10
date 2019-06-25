@@ -50,7 +50,7 @@ public class Model {
 		List<ArtObject> connessioni = new LinkedList<>();
 		ArtObject o1 = idMap.get(id);
 		if(o1!=null) {
-			BreadthFirstIterator<ArtObject, DefaultWeightedEdge> iterator = new BreadthFirstIterator<>(grafo);
+			BreadthFirstIterator<ArtObject, DefaultWeightedEdge> iterator = new BreadthFirstIterator<>(grafo, o1);
 			while(iterator.hasNext()) {
 				connessioni.add(iterator.next());
 			}
